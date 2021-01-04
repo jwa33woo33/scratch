@@ -108,13 +108,27 @@ git commit -amend
 $ git checkout -- 파일이름
 
 - 내가 만약 뭐수정햇는데 위에 커맨드입력하면 감쪽같이 ctr+z 가 되버림 ㅎㅎ
+
 -------------------------------------------------
 11. "스테이징" 되돌리기
 $ git reset HEAD 파일이름
 
+git add로 스테이징 하면 status 메시지가
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   test.txt
+라고뜸
 
+여기서 git reset HEAD . 로 되돌리고 다시 status 확인하면
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   test.txt
+라고 다시 버전 저장전으로 되돌아감
 
-
+-------------------------------------------------
+12. 최신 커밋 되돌리기
+$ git reset HEAD^
 
 
 
@@ -122,7 +136,6 @@ $ git reset HEAD 파일이름
 $ git init
 $ git status
 $ git add 파일이름
-$ git add . (전체파일 스테이징할시)
 $ git commit -m '설명'
 $ git log
 $ git diff

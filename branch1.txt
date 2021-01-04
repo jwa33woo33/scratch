@@ -1,3 +1,2 @@
-This is added from branch1 branch.
-
-askldfjlksdjflksdjf
+this is the test txt file
+created from branch1 branch

@@ -155,6 +155,10 @@ $ git branch
 새로운 브랜치 만들기
 $ git branch 브랜치이름
 
+-------------------------------------------------
+2. 브랜치 사이 이동하기
+$ git checkout 만들어논_브랜치이름
+
 
 
 
@@ -173,4 +177,5 @@ $ git reset --mixed HEAD^
 $ git reset --hard HEAD^
 ------------------------------
 $ git branch
-$ git branch 브랜치이름
+$ git branch 새로운_브랜치이름
+$ git checkout 만들어논_브랜치이름

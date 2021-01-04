@@ -1,0 +1,28 @@
+1. directory에 저장소 만들기(해당 폴더로 들어간뒤 아래의 커맨드 입력
+$ git init
+
+Initialized empty Git repository in /디렉토리/.git/
+(이거하면 해당 폴더에 .git이라는 숨겨진 파일이 생성됨)
+
+2-1. 버전만들기
+Working tree -> Stage area -> Repository
+
+- working tree: 내가 일하는 로컬폴더. 문서를 수정하는곳
+- Stage area: 만든버전을 기록하는곳(만든파일이 대기)
+- Repository: 저장소. 스테이지에 만든버전을 실제로 저장하는곳
+
+2.2. 깃 상태확인
+$ git status
+
+On branch master(현재 마스터 브랜치에 있다는뜻)
+
+No commits yet(커밋한파일이없음)
+
+Untracked files:(아직 버전관리를 하지 않은 파일)
+  (use "git add <file>..." to include in what will be committed)
+	test.txt
+
+3. Working tree에서 수정한 파일을 Staging하기(staging은 버전만들준비를 하라고 알려주는것)
+$ git add 파일이름
+$ git add . (전체파일 스테이징할시)
+

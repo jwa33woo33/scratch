@@ -26,3 +26,17 @@ Untracked files:(아직 버전관리를 하지 않은 파일)
 $ git add 파일이름
 $ git add . (전체파일 스테이징할시)
 
+그다음 git status를 확인해보면
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   test.txt
+라고 뜸 ㅇㅇ 이제 스테이지에 버전이 추가된것임.
+
+4. 스테이지에 올라온 파일 커밋하기
+$ git commit -m '설명'
+
+[master (root-commit) 9b7de6d] modified test.txt
+ 1 file changed, 28 insertions(+)
+ create mode 100644 test.txt
+

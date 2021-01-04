@@ -132,6 +132,8 @@ $ git reset HEAD^
 
 
 
+
+
 커맨드 목록
 $ git init
 $ git status

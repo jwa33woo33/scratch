@@ -4,7 +4,10 @@ $ git init
 Initialized empty Git repository in /디렉토리/.git/
 (이거하면 해당 폴더에 .git이라는 숨겨진 파일이 생성됨)
 
+-------------------------------------------------
+
 2-1. 버전만들기
+개념:
 Working tree -> Stage area -> Repository
 
 - working tree: 내가 일하는 로컬폴더. 문서를 수정하는곳
@@ -22,6 +25,8 @@ Untracked files:(아직 버전관리를 하지 않은 파일)
   (use "git add <file>..." to include in what will be committed)
 	test.txt
 
+-------------------------------------------------
+
 3. Working tree에서 수정한 파일을 Staging하기(staging은 버전만들준비를 하라고 알려주는것)
 $ git add 파일이름
 $ git add . (전체파일 스테이징할시)
@@ -33,6 +38,8 @@ Changes to be committed:
 	new file:   test.txt
 라고 뜸 ㅇㅇ 이제 스테이지에 버전이 추가된것임.
 
+-------------------------------------------------
+
 4. 스테이지에 올라온 파일 커밋하기
 $ git commit -m '설명'
 
@@ -40,3 +47,69 @@ $ git commit -m '설명'
  1 file changed, 28 insertions(+)
  create mode 100644 test.txt
 
+그다음 git status를 확인해보면
+
+On branch master
+nothing to commit, working tree clean
+라고 뜸 ㅇㅇ
+
+-------------------------------------------------
+
+5. 버전이 제대로 만들어졌는지 확인하는법
+$ git log
+
+로그를 확인하면
+commit 26042b662c73fd01c86822448d78f4ad633866ec (HEAD -> master)
+Author: jwa33woo33 <choyoungwoon@gmail.com>
+Date:   Mon Jan 4 10:54:02 2021 +0900
+
+    modified test.txt
+
+이런식으로 뜸 ㅇㅇ
+여기서 보여주는건 commit hash와 커밋햇엇던 작성자, 날짜, 그리고 수정한파일이뜲 ㅇㅇ
+
+6. 변경사항 확인하기
+$ git diff
+
+이거치면 Repository에 저장된거랑 비교해서 현재 내가 막이렇게 수정사항들 적은거 보여줌
+추가된줄과 삭제된줄은 각각
++ 추가된 내용
+- 삭제된 내용
+으로 뜸
+
+-------------------------------------------------
+7. .gitignore 파일로 버전 관리에서 제외하기
+.gitignore 파일만들고
+
+mynote.txt
+temp/
+.swp
+
+이런식으로 버전관리에서 제외시켜줄수 잇뜸!!
+(각각, specific 한 파일이름, temp 디렉토리, 확장자가 .swp인것들모두 제외)
+
+-------------------------------------------------
+
+8. unmodified, modified, staged 상태
+- unmodified: 가장최근에 아무것도 수정안한상태(repository와 동일). 
+** commit 다 한뒤에도 status는 같음
+git status로 확인할시:
+nothing to commit, working tree clean
+가 뜸 ㅇㅇ
+
+- modified: 파일만 수정햇고 stage에 버전을 아직 업데이트 시키지 않은상태
+git status로 확인할시:
+changes not staged for commit
+
+- staged: git add로 버전 업데이트를 햇을시(아직 커밋 직전단계)
+
+
+
+커맨드 목록
+$ git init
+$ git status
+$ git add 파일이름
+$ git add . (전체파일 스테이징할시)
+$ git commit -m '설명'
+$ git log
+$ git diff

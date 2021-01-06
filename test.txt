@@ -173,8 +173,35 @@ $ git merge 브랜치이름
 -------------------------------------------------
 4. 브랜치 삭제
 - 브랜치에서 작업이 완벽하게 다끝낫다고 가정하고 하는것
-$ gi
+$ git branch -d 브랜치이름
 
+
+error: The branch 'branch1' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D branch1'.
+위처럼 에러가뜰때는 강제 삭제해야함. merge가 다 안되었다는것임.
+나같은경우는 원본파일 conflict때문에 merge가 제대로 안됨
+
+강제삭제는
+$ git branch -D 브랜치이름
+
+-------------------------------------------------
+5. 수정중인 파일 감추기 및 되돌리기
+- 이거 사용할려면 파일이 traked 상태여야함(즉 한번이상 커밋한 파일들만 가능)
+그래서 현재 작업하다가 잠깐 다른거부터작업하고 커밋하려고 임시로 숨기는 커맨드는 아래와같음
+$ git stash
+
+이거 커맨드 입력해놓으면 git status로 확인할때 modified: 파일이름 이런목록이 보이질않고
+nothing to commit, working tree clean이라고 뜸 ㅇㅇ
+
+말그대로 숨겨놓은것임(.gitignore에 잠깐 추가햇다가 해도되지않나??.... 굳이??)
+
+- stash 된 목록 보는법
+$ git stash list
+
+- 다시 꺼내오는법
+$ git stash pop
+=================================================
+=================================================
 
 
 커맨드 목록
@@ -196,3 +223,9 @@ $ git branch
 $ git branch 새로운_브랜치이름
 $ git checkout 만들어논_브랜치이름
 $ git merge 합칠_브랜치이름
+$ git branch -d 브랜치이름
+$ git branch -D 브랜치이름
+$ git stash
+$ git stash list
+$ git stash pop
+------------------------------

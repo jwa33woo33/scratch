@@ -1,3 +1,13 @@
+먼저 참고해야할 사항
+
+$ git --help
+이거치면 git의 최상위 커맨드들의 목록보여줌
+
+하위 커맨드 목록을 보고싶으면?
+$ git commit --help
+$ git remote --help
+이런식으로 하면됨 ㅇㅇ
+
 0. 깃환경에서 계정, 이메일지정
 
 $ git config 이름
@@ -200,11 +210,27 @@ $ git stash list
 
 - 다시 꺼내오는법
 $ git stash pop
+
 =================================================
 =================================================
+1. github 원격저장소(remote)에 연결하기(깃헙 웹사이트에 백업)
+- 우선 깃헙 "원격 repository"를 github웹사이트에서 만드셈 ㅇㅇ
+- 터미널에서 연결하고 싶은 폴더로 이동("로컬저장소")
+- 그다음 밑에 커맨드 실행(복사한주소는 깃클론할때 복사하는 그 주소)
+
+$ git remote add origin 복사한주소
+
+2. 해당 로컬저장소가(local) 원격저장소(remote)에 연결이 잘되어있는지 확인하는법
+
+$ git remote -v
+
+
+
+
 
 
 커맨드 목록
+$ git --help
 $ git init
 $ git status
 $ git add 파일이름
@@ -229,3 +255,8 @@ $ git stash
 $ git stash list
 $ git stash pop
 ------------------------------
+$ git remote add origin 복사한주소
+$ git remote -v
+
+git remote rename <old> <new>
+git remote remove <name>

@@ -219,13 +219,22 @@ $ git stash pop
 - 그다음 밑에 커맨드 실행(복사한주소는 깃클론할때 복사하는 그 주소)
 
 $ git remote add origin 복사한주소
+  - 여기서 origin은 리모트 깃허브 저장소 이름 실제로 주소를 가리킴. 깃허브 저장소 주소가 너무길어서 줄여서 추가 하는것임
 
+-------------------------------------------------
 2. 해당 로컬저장소가(local) 원격저장소(remote)에 연결이 잘되어있는지 확인하는법
 
 $ git remote -v
 
+-------------------------------------------------
+3. 깃허브 저장소 이름 바꾸기
 
+$ git remote rename <old> <new>
 
+-------------------------------------------------
+4. 깃허브 원격저장소에(remote repository)에 파일 올리기
+
+$ git push
 
 
 
@@ -257,6 +266,5 @@ $ git stash pop
 ------------------------------
 $ git remote add origin 복사한주소
 $ git remote -v
-
-git remote rename <old> <new>
+$ git remote rename <old> <new>
 git remote remove <name>

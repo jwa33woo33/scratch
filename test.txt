@@ -1,0 +1,275 @@
+먼저 참고해야할 사항
+
+$ git --help
+이거치면 git의 최상위 커맨드들의 목록보여줌
+
+하위 커맨드 목록을 보고싶으면?
+$ git commit --help
+$ git remote --help
+이런식으로 하면됨 ㅇㅇ
+
+0. 깃환경에서 계정, 이메일지정
+
+$ git config 이름
+ex) git config jwa33woo33
+
+$ git config 이메일@gmail.com
+
+-------------------------------------------------
+1. directory에 저장소 만들기(해당 폴더로 들어간뒤 아래의 커맨드 입력
+$ git init
+
+Initialized empty Git repository in /디렉토리/.git/
+(이거하면 해당 폴더에 .git이라는 숨겨진 파일이 생성됨)
+
+-------------------------------------------------
+2-1. 버전만들기
+개념:
+Working tree -> Stage area -> Repository
+
+- working tree: 내가 일하는 로컬폴더. 문서를 수정하는곳
+- Stage area: 만든버전을 기록하는곳(만든파일이 대기)
+- Repository: 저장소. 스테이지에 만든버전을 실제로 저장하는곳
+
+2.2. 깃 상태확인
+$ git status
+
+On branch master(현재 마스터 브랜치에 있다는뜻)
+
+No commits yet(커밋한파일이없음)
+
+Untracked files:(아직 버전관리를 하지 않은 파일)
+  (use "git add <file>..." to include in what will be committed)
+	test.txt
+
+-------------------------------------------------
+3. Working tree에서 수정한 파일을 Staging하기(staging은 버전만들준비를 하라고 알려주는것)
+$ git add 파일이름
+$ git add . (전체파일 스테이징할시)
+
+그다음 git status를 확인해보면
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+	new file:   test.txt
+라고 뜸 ㅇㅇ 이제 스테이지에 버전이 추가된것임.
+
+-------------------------------------------------
+4. 스테이지에 올라온 파일 커밋하기
+$ git commit -m '설명'
+
+[master (root-commit) 9b7de6d] modified test.txt
+ 1 file changed, 28 insertions(+)
+ create mode 100644 test.txt
+
+그다음 git status를 확인해보면
+
+On branch master
+nothing to commit, working tree clean
+라고 뜸 ㅇㅇ
+
+-------------------------------------------------
+5. 버전이 제대로 만들어졌는지 확인하는법
+$ git log
+
+로그를 확인하면
+commit 26042b662c73fd01c86822448d78f4ad633866ec (HEAD -> master)
+Author: jwa33woo33 <choyoungwoon@gmail.com>
+Date:   Mon Jan 4 10:54:02 2021 +0900
+
+    modified test.txt
+
+이런식으로 뜸 ㅇㅇ
+여기서 보여주는건 commit hash와 커밋햇엇던 작성자, 날짜, 그리고 수정한파일이뜲 ㅇㅇ
+
+6. 변경사항 확인하기
+$ git diff
+
+이거치면 Repository에 저장된거랑 비교해서 현재 내가 막이렇게 수정사항들 적은거 보여줌
+추가된줄과 삭제된줄은 각각
++ 추가된 내용
+- 삭제된 내용
+으로 뜸
+
+-------------------------------------------------
+7. .gitignore 파일로 버전 관리에서 제외하기
+.gitignore 파일만들고
+
+mynote.txt
+temp/
+.swp
+
+이런식으로 버전관리에서 제외시켜줄수 잇뜸!!
+(각각, specific 한 파일이름, temp 디렉토리, 확장자가 .swp인것들모두 제외)
+
+-------------------------------------------------
+8. unmodified, modified, staged 상태
+- unmodified: 가장최근에 아무것도 수정안한상태(repository와 동일). 
+** commit 다 한뒤에도 status는 같음
+git status로 확인할시:
+nothing to commit, working tree clean
+가 뜸 ㅇㅇ
+
+- modified: 파일만 수정햇고 stage에 버전을 아직 업데이트 시키지 않은상태
+git status로 확인할시:
+changes not staged for commit
+
+- staged: git add로 버전 업데이트를 햇을시(아직 커밋 직전단계)
+
+-------------------------------------------------
+9. "방금" 커밋한 메시지 수정
+git commit -amend
+(커밋햇을때 수정내용을 잘못해놔서 수정하고싶을때 쓰는커맨드)
+
+-------------------------------------------------
+10. "작업트리"에서 수정한 파일 되돌리기
+$ git checkout -- 파일이름
+
+- 내가 만약 뭐수정햇는데 위에 커맨드입력하면 감쪽같이 ctr+z 가 되버림 ㅎㅎ
+
+-------------------------------------------------
+11. "스테이징" 되돌리기
+$ git reset HEAD 파일이름
+
+git add로 스테이징 하면 status 메시지가
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   test.txt
+라고뜸
+
+여기서 git reset HEAD . 로 되돌리고 다시 status 확인하면
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   test.txt
+라고 다시 버전 저장전으로 되돌아감
+
+-------------------------------------------------
+12. "가장최신" 커밋 되돌리기
+$ git reset HEAD^
+
+-------------------------------------------------
+13. 특정 커밋으로 되돌리기
+$ git reset 커밋해시
+
+-------------------------------------------------
+14. 커밋 삭제하지 않고 되돌리기(왠만하면 reset대신 이거쓰는게남)
+git revert 커밋해시
+
+=================================================
+=================================================
+1. 새 branch(브랜치) 만들기
+브랜치목록확인 및 현재 내가 어떤 브랜치에 들어와있는지 확인(*모양으로 확인)
+$ git branch
+
+새로운 브랜치 만들기
+$ git branch 브랜치이름
+
+-------------------------------------------------
+2. 브랜치 사이 이동하기
+$ git checkout 만들어논_브랜치이름
+
+-------------------------------------------------
+3. 브랜치 병합하기
+- 특정브랜치에서 이것저것 수정햇다 치고 add, commit을 먼저함.
+  (우선 당장은 왠만하면 master branch에서 관리하는 파일은 건드리지말고 새로운 py파일만 만드셈)
+  (마스터에서도 수정하고 브랜치에서도 수정하면 conflict일어남 ㅅㅂ.)
+  (하는방법잇긴한데 코드 하나하나 확인해준뒤 둘이뭐가맞는지를 보고 수정해야 merge가 가능하기때문에 골아파짐)
+  (이거에 대해 대처하기위해 나중에 "병합 및 충돌 해결 프로그램" 공부하자)
+- 먼저 master branch로 이동. master branch가 모든권한을 가지고 있기때문에 여기서 merge를해야함
+
+$ git merge 브랜치이름
+
+-------------------------------------------------
+4. 브랜치 삭제
+- 브랜치에서 작업이 완벽하게 다끝낫다고 가정하고 하는것
+$ git branch -d 브랜치이름
+
+
+error: The branch 'branch1' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D branch1'.
+위처럼 에러가뜰때는 강제 삭제해야함. merge가 다 안되었다는것임.
+나같은경우는 원본파일 conflict때문에 merge가 제대로 안됨
+
+강제삭제는
+$ git branch -D 브랜치이름
+
+-------------------------------------------------
+5. 수정중인 파일 감추기 및 되돌리기
+- 이거 사용할려면 파일이 traked 상태여야함(즉 한번이상 커밋한 파일들만 가능)
+그래서 현재 작업하다가 잠깐 다른거부터작업하고 커밋하려고 임시로 숨기는 커맨드는 아래와같음
+$ git stash
+
+이거 커맨드 입력해놓으면 git status로 확인할때 modified: 파일이름 이런목록이 보이질않고
+nothing to commit, working tree clean이라고 뜸 ㅇㅇ
+
+말그대로 숨겨놓은것임(.gitignore에 잠깐 추가햇다가 해도되지않나??.... 굳이??)
+
+- stash 된 목록 보는법
+$ git stash list
+
+- 다시 꺼내오는법
+$ git stash pop
+
+=================================================
+=================================================
+1. github 원격저장소(remote)에 연결하기(깃헙 웹사이트에 백업)
+- 우선 깃헙 "원격 repository"를 github웹사이트에서 만드셈 ㅇㅇ
+- 터미널에서 연결하고 싶은 폴더로 이동("로컬저장소")
+- 그다음 밑에 커맨드 실행(복사한주소는 깃클론할때 복사하는 그 주소)
+
+$ git remote add origin 복사한주소
+  - 여기서 origin은 리모트 깃허브 저장소 이름 실제로 주소를 가리킴. 깃허브 저장소 주소가 너무길어서 줄여서 추가 하는것임
+
+-------------------------------------------------
+2. 해당 로컬저장소가(local) 원격저장소(remote)에 연결이 잘되어있는지 확인하는법
+
+$ git remote -v
+
+-------------------------------------------------
+3. 깃허브 저장소 이름 바꾸기
+
+$ git remote rename <old> <new>
+
+-------------------------------------------------
+4. 깃허브 원격저장소에(remote repository)에 파일 올리기
+- 깃헙 웹사이트에 리모트로 등록한뒤 처음 올리는거기때문에 먼저 밑에 커맨드로 해야함
+- 로컬 저장소의 브랜치를 origin, 즉 원격 저장소의 master 브랜치로 
+  푸시하라는명령임 ㅇㅇ 여기서 -u 옵션은 로컬 저장소의 브랜치를 리모트 저장소의 
+  master 브랜치에 연결하기 위한것으로 처음에 1번만사용하면됨 ㅇㅇ
+
+$ git push -u origin master
+
+
+
+
+커맨드 목록
+$ git --help
+$ git init
+$ git status
+$ git add 파일이름
+$ git commit -m '설명'
+$ git commit -amend
+$ git log
+$ git diff
+$ git checkout -- 파일이름
+$ git reset HEAD 파일이름
+$ git reset HEAD^
+$ git reset --soft HEAD^
+$ git reset --mixed HEAD^
+$ git reset --hard HEAD^
+------------------------------
+$ git branch
+$ git branch 새로운_브랜치이름
+$ git checkout 만들어논_브랜치이름
+$ git merge 합칠_브랜치이름
+$ git branch -d 브랜치이름
+$ git branch -D 브랜치이름
+$ git stash
+$ git stash list
+$ git stash pop
+------------------------------
+$ git remote add origin 복사한주소
+$ git remote -v
+$ git remote rename <old> <new>
+git remote remove <name>
